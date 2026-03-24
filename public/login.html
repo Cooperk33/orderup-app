@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Login</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="login-page">
+  <a class="site-brand" href="/">LunchTime</a>
+  <main class="panel login-panel">
+    <section class="page-hero">
+      <p class="eyebrow">Staff Access</p>
+      <h1 id="login-title">Enter staff PIN</h1>
+      <p id="login-description" class="lede">Use the restaurant PIN to open the server dashboard and table manager.</p>
+    </section>
+
+    <section class="surface">
+      <form id="login-form" class="stack">
+        <label>
+          <span>PIN</span>
+          <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="1111" required>
+        </label>
+        <button type="submit">Unlock</button>
+        <p id="login-status" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="/login.js"></script>
+</body>
+</html>

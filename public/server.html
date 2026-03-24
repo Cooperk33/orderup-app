@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Alerts</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="server-page">
+  <a class="site-brand" href="/">LunchTime</a>
+  <main class="panel server-panel">
+    <section id="shift-signin" class="surface shift-signin">
+      <section class="page-hero page-hero-tight">
+        <p class="eyebrow">Shift Sign-In</p>
+        <h1>Start your shift</h1>
+        <p class="lede">Choose the restaurant, enter your server name, and list the tables you are responsible for today.</p>
+      </section>
+
+      <form id="shift-form" class="stack">
+        <label>
+          <span>Restaurant</span>
+          <select id="restaurant-select" required>
+            <option value="">Select a restaurant</option>
+            <option value="Downtown Dining Room">Downtown Dining Room</option>
+            <option value="Main Street Grill">Main Street Grill</option>
+            <option value="Harbor Patio">Harbor Patio</option>
+            <option value="custom">Other restaurant</option>
+          </select>
+        </label>
+
+        <label id="custom-restaurant-field" class="hidden">
+          <span>Restaurant name</span>
+          <input id="custom-restaurant" type="text" placeholder="Type the restaurant name">
+        </label>
+
+        <label>
+          <span>Server name</span>
+          <input id="server-name" type="text" placeholder="Jordan" required>
+        </label>
+
+        <label>
+          <span>Tables for this shift</span>
+          <textarea id="assigned-tables" rows="3" placeholder="12, 14, 16 or Patio 1, Patio 2" required></textarea>
+        </label>
+
+        <button type="submit">Open Dashboard</button>
+        <p id="shift-status" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="dashboard-shell" class="hidden">
+      <section class="page-hero server-header">
+        <div>
+          <p class="eyebrow">Toast Device View</p>
+          <h1>Live Table Assistance Alerts</h1>
+          <p id="shift-summary" class="lede compact-lede"></p>
+        </div>
+        <div class="header-actions">
+          <button id="edit-shift" type="button" class="secondary-button">Edit shift</button>
+          <a class="ghost-link" href="/admin">Manage tables</a>
+          <a class="ghost-link secondary-link" href="/logout">Log out</a>
+          <span id="connection-state" class="pill offline">Connecting…</span>
+        </div>
+      </section>
+
+      <section class="summary-grid">
+        <article>
+          <span>Pending</span>
+          <strong id="pending-count">0</strong>
+        </article>
+        <article>
+          <span>Acknowledged</span>
+          <strong id="ack-count">0</strong>
+        </article>
+        <article>
+          <span>My Tables</span>
+          <strong id="table-count">0</strong>
+        </article>
+      </section>
+
+      <section id="alerts" class="alerts" aria-live="polite"></section>
+    </section>
+  </main>
+
+  <script src="/server.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Need Assistance</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="customer-page">
+  <a class="site-brand" href="/">LunchTime</a>
+  <main class="panel customer-panel">
+    <section class="page-hero">
+      <p class="eyebrow">Table Service</p>
+      <h1>Need your server?</h1>
+      <p class="lede">Send a quick ping to the restaurant team and let them know what your table needs.</p>
+    </section>
+
+    <section class="surface">
+      <div id="table-badge" class="table-badge hidden"></div>
+
+      <form id="ping-form" class="stack">
+        <label>
+          <span>Restaurant</span>
+          <select id="restaurant" name="restaurant" required>
+            <option value="">Select a restaurant</option>
+            <option value="Downtown Dining Room">Downtown Dining Room</option>
+            <option value="Main Street Grill">Main Street Grill</option>
+            <option value="Harbor Patio">Harbor Patio</option>
+            <option value="custom">Other restaurant</option>
+          </select>
+        </label>
+
+        <label id="custom-restaurant-field" class="hidden">
+          <span>Restaurant name</span>
+          <input id="custom-restaurant" name="customRestaurant" type="text" placeholder="Type the restaurant name">
+        </label>
+
+        <label id="table-field">
+          <span>Table Number</span>
+          <input id="table" name="table" type="text" inputmode="numeric" placeholder="12" required>
+        </label>
+
+        <label>
+          <span>What do you need?</span>
+          <select id="requestType" name="requestType">
+            <option value="Ready to order">Ready to order</option>
+            <option value="Need the check">Need the check</option>
+            <option value="Drink refill">Drink refill</option>
+            <option value="General help">General help</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Optional note</span>
+          <textarea id="note" name="note" rows="3" placeholder="Anything else your server should know?"></textarea>
+        </label>
+
+        <button type="submit">Send Ping</button>
+        <p id="form-status" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="/customer.js"></script>
+</body>
+</html>

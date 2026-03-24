@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Manager</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin-page">
+  <a class="site-brand" href="/">LunchTime</a>
+  <main class="panel admin-panel">
+    <section class="page-hero admin-header">
+      <div>
+        <p class="eyebrow">Operations</p>
+        <h1>Table Link Manager</h1>
+        <p class="lede">Create table-specific customer links, print them, and disable links when tables are out of service.</p>
+      </div>
+      <div class="header-actions">
+        <a class="ghost-link" href="/server">Open server dashboard</a>
+        <button id="print-cards" type="button" class="secondary-button">Print cards</button>
+        <a class="ghost-link secondary-link" href="/logout">Log out</a>
+      </div>
+    </section>
+
+    <section class="admin-grid">
+      <form id="bulk-form" class="stack surface">
+        <h2>Generate a section</h2>
+        <label>
+          <span>Prefix</span>
+          <input id="bulk-prefix" type="text" value="Table">
+        </label>
+        <label>
+          <span>Start at</span>
+          <input id="bulk-start" type="number" min="1" value="1">
+        </label>
+        <label>
+          <span>How many tables</span>
+          <input id="bulk-count" type="number" min="1" max="100" value="12">
+        </label>
+        <button type="submit">Create batch</button>
+      </form>
+
+      <form id="single-form" class="stack surface">
+        <h2>Add one table</h2>
+        <label>
+          <span>Label</span>
+          <input id="single-label" type="text" placeholder="Patio 1">
+        </label>
+        <button type="submit">Add table</button>
+      </form>
+    </section>
+
+    <p id="admin-status" class="status" aria-live="polite"></p>
+
+    <section id="table-cards" class="card-grid" aria-live="polite"></section>
+  </main>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
