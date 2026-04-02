@@ -16,8 +16,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 
-HOST = "0.0.0.0"
-PORT = 8000
+HOST = os.environ.get("HOST", "0.0.0.0")
+PORT = int(os.environ.get("PORT", "8000"))
 BASE_DIR = Path(__file__).parent
 PUBLIC_DIR = BASE_DIR / "public"
 DB_PATH = BASE_DIR / "app.db"
@@ -634,5 +634,5 @@ class RequestHandler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     init_db()
     server = ThreadingHTTPServer((HOST, PORT), RequestHandler)
-    print(f"Serving on http://127.0.0.1:{PORT}")
+    print(f"Serving on http://{HOST}:{PORT}")
     server.serve_forever()

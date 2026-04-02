@@ -30,6 +30,36 @@ Then open:
 - `http://127.0.0.1:8000/server` for the staff dashboard
 - `http://127.0.0.1:8000/admin` for table setup and printable cards
 
+## Put it online
+
+GitHub does not run Python servers by itself. The normal setup is:
+
+1. Push this repo to GitHub
+2. Connect the GitHub repo to a host like Render or Railway
+3. Set the start command to `python3 app.py`
+4. Add an environment variable named `STAFF_PIN`
+
+This app now reads the hosting platform's `PORT` automatically, which most public hosts require.
+
+### Example with Render
+
+- Create a new `Web Service`
+- Connect your GitHub repository
+- Runtime: `Python 3`
+- Build command: leave blank
+- Start command: `python3 app.py`
+- Environment variable: `STAFF_PIN=your-real-pin`
+
+After deploy, Render will give you a public URL like `https://your-app.onrender.com`.
+
+## Important note about data
+
+- `app.db` is a local SQLite file
+- On many free/simple hosts, local disk can reset or be ephemeral
+- That means alerts and tables may be lost after a redeploy or restart
+
+For a first public test, this is fine. For production, we should move the data to a hosted database.
+
 ## Recommended workflow
 
 1. Open `/admin`
