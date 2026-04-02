@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).parent
 PUBLIC_DIR = BASE_DIR / "public"
 DB_PATH = BASE_DIR / "app.db"
 STAFF_PIN = os.environ.get("STAFF_PIN", "1111")
+PERSONAL_PIN = os.environ.get("PERSONAL_PIN", "1212")
 SESSION_TTL_SECONDS = 60 * 60 * 12
 
 
@@ -307,6 +308,18 @@ def destroy_session(token):
         sessions.pop(token, None)
 
 
+def is_valid_pin(pin):
+    allowed_pins = (STAFF_PIN, PERSONAL_PIN)
+    candidate_hash = hashlib.sha256(pin.encode("utf-8")).hexdigest()
+    return any(
+        hmac.compare_digest(
+            candidate_hash,
+            hashlib.sha256(allowed_pin.encode("utf-8")).hexdigest(),
+        )
+        for allowed_pin in allowed_pins
+    )
+
+
 class RequestHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(PUBLIC_DIR), **kwargs)
@@ -469,7 +482,7 @@ class RequestHandler(SimpleHTTPRequestHandler):
         pin = str(payload.get("pin", "")).strip()
         next_path = str(payload.get("next", "/server")).strip() or "/server"
 
-        if not hmac.compare_digest(hashlib.sha256(pin.encode("utf-8")).hexdigest(), hashlib.sha256(STAFF_PIN.encode("utf-8")).hexdigest()):
+        if not is_valid_pin(pin):
             self._send_json({"error": "Incorrect PIN."}, status=HTTPStatus.UNAUTHORIZED)
             return
 
